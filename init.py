@@ -21,7 +21,7 @@ def mkdb():
 
 
 if __name__ == '__main__':
-    # 기존의 movies 콜렉션을 삭제하기
+    # 초기화
     db.users.drop()
 
     # db 생성

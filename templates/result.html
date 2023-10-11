@@ -38,10 +38,12 @@
                 url: "/api/rank",
                 data: {},
                 success: function (response) {
-                    let temp = response['rank']
-                    for(let i = 0; i<temp.length; i++){
-                        $('#top'+(i+1)+'-pid').append(temp[i]['pid'])
-                        $('#top'+(i+1)+'-record').append(temp[i]['score'])
+                    for(let i = 0; i<response['rank'].length; i++){
+                        $('#top'+(i+1)+'-pid').append(response['name'][i]['name'])
+                        var time = response['rank'][i]['score']
+                        var min = Math.floor(time/60)
+                        var sec = Math.floor(time%60)
+                        $('#top'+(i+1)+'-record').append(min +'분 ' + sec + '초')
                     }
                     
                 }

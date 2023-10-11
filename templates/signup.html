@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Jungle - Sign up</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="title">
+        <span>Typing</span>
+        <span>Jungle</span>
+    </div>
+    <form>
+        <div>
+            <input type="text" id="id" required placeholder="아이디를 입력하세요">
+        </div>
+        <div>
+            <input type="password" id="pw" required placeholder="비밀번호를 입력하세요">
+        </div>
+        <div>
+            <input type="password" id="pw" required placeholder="비밀번호를 다시 입력하세요">
+        </div>
+        <div>
+            <button class="btn-logIn">Create an account</button>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,47 @@
+@import "reset.css";
+@import "variables.css";    /* 자주 사용하는 색상 변수화 */
+
+body{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header{
+    justify-content: flex-start;
+}
+
+form{
+    width: 300px;
+    height: 150px;
+    padding: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form > div{
+    margin: 5px 0px;
+}
+
+.title{
+    width: 300px;
+    height: 200px;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSie7cyddf33Xw7MtuCHgiGwDrOohvX-uHGvg&usqp=CAU');
+    background-size: cover;
+    display: flex;
+}
+
+.title > span{
+    margin: auto;
+    font-size: 40px;
+    font-weight: bolder;
+    -webkit-text-stroke: 0.5px var(--green);
+}
+
+#logo-jungle{
+    width: 150px;
+}

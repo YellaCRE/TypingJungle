@@ -4,6 +4,8 @@
 /* login, signup 페이지에 사용되는 css */
 .main{
     height: 100vh;
+    width: 600px;
+    margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -84,4 +86,54 @@ button{
     position: absolute;
     top: 15px;
     right: 15px;
+}
+
+.ranking{
+    background-color: black;
+    color: var(--green);
+    width: 500px;
+    height: 450px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.ranking-title{
+    width: 480px;
+    height: 50px;
+    color: var(--green);
+    font-size: 35px;
+    font-weight: bolder;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.btn-game{
+    margin-bottom: 10px;
+}
+
+tr > *{
+    color: var(--green);
+}
+
+.record-box{
+    background-color: black;
+    color: var(--green);
+    width: 500px;
+    height: 200px;
+    margin-bottom: 20px;
+
+}
+
+.record-text{
+    height: 70px;
+    font-size: 30px;
+    line-height: 70px;
+    text-align: center;
+}
+
+#record{
+    height: 130px;
+    line-height: 130px;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 50px;
 }

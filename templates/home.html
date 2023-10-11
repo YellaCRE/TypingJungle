@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Jungle</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+</head>
+
+<body>
+    <div class="nav">
+        <span class="nav-logo">Typing Jungle</span>
+        <div class="nav-btn">
+            <button>Log out</button>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="ranking">
+            <!-- top 10 랭킹 뜨도록 구현 -->
+        </div>
+        <div>
+            <button class="btn-game">Game start</button>
+            <!-- 누르면 game page로 이동 -->
+        </div>
+        <div>
+            <button class="btn-tutorial">Tutorial</button>
+            <div class="modal">
+                <div class="modal-content">
+                    <a class="btn-close">✖</a>
+                    <h2>How to play<br>Typing Jungle</h2>
+                    <p>
+                        좌측의 문제와 동일한 문장을 우측 답안란에 작성하세요.<br>
+                        전체 문제를 푸는 동안 시간은 계속 흘러갑니다 🕐🕓🕗🕛<br>
+                        오타가 발생하면 다음 문제로 넘어가지 않아요!<br>
+                        직접 오타를 찾고, 정확하게 작성해보세요.<br>
+                        <br>
+                        타이핑 정글과 함께 빠르고 정확하게 코드를 치는 정글러가 되어보세요🤓
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('.btn-tutorial').click(function(){
+            $('.modal').fadeIn()
+        })
+        $('.btn-close').click(function(){
+            $('.modal').fadeOut()
+        })
+    </script>
+</body>
+
+</html>

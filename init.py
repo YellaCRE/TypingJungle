@@ -1,15 +1,15 @@
 import random
-from pymongo import MongoClient           # pymongo를 임포트 하기(패키지 인스톨 먼저 해야겠죠?)
+from pymongo import MongoClient
 
 client = MongoClient('localhost', 27017)
-db = client.typejungle                    # 'dbjungle'라는 이름의 db를 만듭니다.
+db = client.typejungle
 
 
 def mkdb():
     # userDB
-    db.users.insert_one({'pid': '1234','name': 'hwang', 'id': 'id123', 'pw': 'pw123'})
-    db.users.insert_one({'pid': '1235','name': 'choi', 'id': 'id123', 'pw': 'pw123'})
-    db.users.insert_one({'pid': '1236','name': 'yang', 'id': 'id123', 'pw': 'pw123'})
+    db.users.insert_one({'pid': '1234', 'id': 'id123', 'pw': 'pw123', 'name': 'hwang'})
+    db.users.insert_one({'pid': '1235', 'id': 'id123', 'pw': 'pw123', 'name': 'choi'})
+    db.users.insert_one({'pid': '1236', 'id': 'id123', 'pw': 'pw123', 'name': 'yang'})
 
     # rankingDB
     db.ranking.insert_one({'pid': '1234','score': '100'})

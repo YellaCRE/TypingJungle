@@ -5,19 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Typing Jungle - Sign up</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    
     <script>
-        function signup(){
-            let id = $('#id').val();
-            let password = $('#pw').val();
-
+        function signup() {
+            alert('1')
             $.ajax({
                 type: "POST",
-                url: "/signupfunc",
-                data: {id : id, pw : password},
+                url: "/api/register",
+                data: {
+                    id_give: $('#userid').val(),
+                    pw_give: $('#userpw').val(),
+                    nickname_give: $('#usernick').val()
+                },
                 success: function (response) {
-                    console.log(response)
+                    if (response['result'] == 'success') {
+                        alert('회원가입이 완료되었습니다.')
+                        window.location.href = '/login'
+                    } else {
+                        alert(response['msg'])
+                    }
                 }
-            });
+            })
+            alert('2')
         }
     </script>
 </head>
@@ -27,7 +39,7 @@
             src="https://blog.krafton.com/wp-content/uploads/2022/08/%EC%82%AC%EC%A7%84%EC%9E%90%EB%A3%8C1_%ED%81%AC%EB%9E%98%ED%94%84%ED%86%A4-%EC%A0%95%EA%B8%80-%EB%A1%9C%EA%B3%A0-002.jpg"
             alt="">
     </div>
-    
+
     <div class="main">
         <div class="title">
             <span>Typing</span>
@@ -36,16 +48,16 @@
 
         <form>
             <div>
-                <input type="text" id="id" required placeholder="아이디를 입력하세요">
+                <input type="text" id="userid" required placeholder="아이디를 입력하세요">
             </div>
             <div>
-                <input type="password" id="pw" required placeholder="비밀번호를 입력하세요">
+                <input type="password" id="userpw" required placeholder="비밀번호를 입력하세요">
             </div>
             <div>
-                <input type="password" id="pw" required placeholder="비밀번호를 다시 입력하세요">
+                <input type="text" id="usernick" required placeholder="닉네임을 입력하세요">
             </div>
             <div class="btn">
-                <button class="btn-signUp">Sign up</button>
+                <button class="btn-signUp" onclick="signup()">Sign up</button>
             </div>
         </form>
     </div>

@@ -30,12 +30,12 @@ def test_test():
 #로그인 엔드포인트
 @app.route('/login', methods=['POST'])
 def login():
-    data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
+    username = request.form['id']
+    password = request.form['password']
+    print(username, password)
     
     # MongoDB에서 사용자를 조회
-    user = db.users.find_one({'username': username, 'password': password})
+    user = db.users.find_one({'name': username, 'pw': password})
     
     if user:
         access_token = create_access_token(identity=username)

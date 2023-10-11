@@ -1,6 +1,5 @@
-from flask import Flask, request
-from flask_jwt_extended import JWTManager
-from flask_jwt_extended import *
+from flask import Flask, request, render_template
+from flask_jwt_extended import JWTManager, create_access_token
 from pymongo import MongoClient
 
 app = Flask(import_name= __name__)
@@ -11,9 +10,8 @@ app.config.update(
 )
 
 # MongoDB
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient('localhost', 27017)
 db = client.dbjungle
-users_collection = db["users"]
 
 
 jwt = JWTManager(app)
@@ -27,7 +25,7 @@ class User:
 
 @app.route("/")
 def test_test():
-    return "<h1> Hello, I'm IML!</h1>"
+    return render_template('index.html')
 
 #로그인 엔드포인트
 @app.route('/login', methods=['POST'])
@@ -37,7 +35,7 @@ def login():
     password = data.get('password')
     
     # MongoDB에서 사용자를 조회
-    user = users_collection.find_one({'username': username, 'password': password})
+    user = db.users.find_one({'username': username, 'password': password})
     
     if user:
         access_token = create_access_token(identity=username)
@@ -46,4 +44,5 @@ def login():
         return {'message': '유효하지 않음'}, 401
 
 if __name__ == '__main__':
-    app.run(host = '0.0.0.0', port = 5000, debug = True)
+    app.run(host = '0.0.0.0', port = 5001, debug = True)
+    

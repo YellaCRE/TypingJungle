@@ -15,21 +15,28 @@
             $.ajax({
                 type: "POST",
                 url: "/api/login",
-                data: {id_give: $('#userid').val(), pw_give: $('#userpw').val()},
+                data: {
+                    id_give: $('#userid').val(), 
+                    pw_give: $('#userpw').val()
+                },
                 success: function (response) {
                     if (response['result'] == 'success') {
                         // 로그인이 정상적으로 되면, 토큰을 받아옵니다.
                         // 이 토큰을 mytoken이라는 키 값으로 쿠키에 저장합니다.
-                        $.cookie('mytoken', response['token']);
+                        // $.cookie('mytoken', response['token']);
 
                         alert('로그인 완료!')
-                        window.location.href = '/'
+                        window.location.href = '/home'
                     } else {
                         // 로그인이 안되면 에러메시지를 띄웁니다.
                         alert(response['msg'])
                     }
                 }
             })
+        }
+
+        function signup() {
+            window.location.href = '/signup'
         }
     </script>
 </head>
@@ -58,7 +65,7 @@
                 <button class="btn-LogIn" onclick="login()">Log in</button>
             </div>
         </form>
-        <button class="btn-signUp">Sign up</button>
+        <button class="btn-signUp" onclick="signup()">Sign up</button>
     </div>
 </body>
 

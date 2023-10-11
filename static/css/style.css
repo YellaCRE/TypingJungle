@@ -1,16 +1,13 @@
 @import "reset.css";
 @import "variables.css";    /* 자주 사용하는 색상 변수화 */
 
-body{
+/* login, signup 페이지에 사용되는 css */
+.main{
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-.header{
-    justify-content: flex-start;
 }
 
 form{
@@ -21,6 +18,7 @@ form{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 20px;
 }
 
 form > div{
@@ -42,6 +40,18 @@ form > div{
     -webkit-text-stroke: 0.5px var(--green);
 }
 
-#logo-jungle{
-    width: 150px;
+button{
+    background-color: black;
+    color: var(--green);
+}
+
+.nav{
+    width:100%;
+    height:100px;
+}
+
+
+.nav-logo{
+    height: 100%;
+    object-fit: cover;
 }

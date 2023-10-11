@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 from flask_jwt_extended import JWTManager, create_access_token
 from pymongo import MongoClient
 
@@ -22,17 +22,15 @@ class User:
         self.username = username
         self.password = password
 
-
+#로그인 엔드포인트
 @app.route("/")
-def test_test():
+def login_home():
     return render_template('index.html')
 
-#로그인 엔드포인트
-@app.route('/login', methods=['POST'])
+@app.route('/loginfunc', methods=['POST'])
 def login():
     username = request.form['id']
     password = request.form['password']
-    print(username, password)
     
     # MongoDB에서 사용자를 조회
     user = db.users.find_one({'name': username, 'pw': password})
@@ -42,6 +40,21 @@ def login():
         return {'access_token': access_token}, 200
     else:
         return {'message': '유효하지 않음'}, 401
+
+#회원가입 엔드포인트
+@app.route('/signup')
+def signup_home():
+    return render_template('signup.html')
+
+@app.route('/signupfunc', methods=['POST'])
+def signup():
+    id = request.form["id"]
+    pw = request.form["pw"]
+    
+    doc = {'pid': '1234', 'name': 'check', 'id': id, 'pw': pw}
+    db.users.insert_one(doc)
+    return jsonify({'msg': '저장 완료'})
+
 
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', port = 5001, debug = True)

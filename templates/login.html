@@ -25,6 +25,8 @@
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
 
     <script>
         function login() {
@@ -39,9 +41,7 @@
                     if (response['result'] == 'success') {
                         // 로그인이 정상적으로 되면, 토큰을 받아옵니다.
                         // 이 토큰을 mytoken이라는 키 값으로 쿠키에 저장합니다.
-                        // $.cookie('mytoken', response['token']);
-
-                        alert('로그인 완료!')
+                        $.cookie('mytoken', response['token']);
                         window.location.href = '/home'
                     } else {
                         // 로그인이 안되면 에러메시지를 띄웁니다.

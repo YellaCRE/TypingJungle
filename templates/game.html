@@ -25,6 +25,7 @@
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
     <script>
         let tenMillis = 0;
@@ -33,10 +34,26 @@
         let intervalId;
 
         $(document).ready(function() {
+            game_page();
             clearInterval(intervalId);
             intervalId = setInterval(operateTimer, 10);
         });
         
+        function game_page(){
+            $.ajax({
+                type: "GET",
+                url: "/api/token",
+                data: {},
+                success: function(response){
+                    if(response['result'] == 'success'){
+                    }
+                    else{
+                        alert('로그인 시간이 만료되었습니다.')
+                        window.location.href = '/'
+                    }
+                }
+            })
+        }
         // 10ms 마다 시간에 대한 숫자가 증가한다!
         function operateTimer(){
             tenMillis++;
@@ -60,7 +77,7 @@
             toast('틀렸습니다!');
             cnt++;
             document.getElementById("solved_cnt").textContent = cnt;
-            if(cnt == 3){
+            if(cnt >= 3){
                 window.location.href = '/result'
             }
         }
@@ -78,11 +95,18 @@
             toast.classList.add("reveal"),
                 toast.innerText = string
         }
+
+        function logout(){
+            alert('로그아웃 되었습니다.')
+            $.removeCookie('mytoken')
+            window.location.href = '/'
+        }
     </script>
 </head>
 
 <body>
     <div class="nav">
+        <button onclick="logout()">Log out</button>
         <!-- 수정 중 -->
     </div>
     <div class="main">

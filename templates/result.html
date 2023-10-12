@@ -25,6 +25,8 @@
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
 
     <script>
         $(document).ready(function () {
@@ -71,6 +73,12 @@
         function gohome() {
             window.location.href = '/home'
         }
+
+        function logout(){
+            alert('로그아웃 되었습니다.')
+            $.removeCookie('mytoken')
+            window.location.href = '/'
+        }
     </script>
 </head>
 
@@ -78,7 +86,7 @@
     <div class="nav">
         <span class="nav-logo">Typing Jungle</span>
         <div class="nav-btn">
-            <button>Log out</button>
+            <button onclick="logout()">Log out</button>
         </div>
     </div>
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,6 +45,20 @@
                     }
                 }
             })
+        }
+
+        function toast(string) {
+            const toast = document.getElementById("toast");
+        
+            toast.classList.contains("reveal") ?
+                (clearTimeout(removeToast), removeToast = setTimeout(function () {
+                    document.getElementById("toast").classList.remove("reveal")
+                }, 1000)) :
+                removeToast = setTimeout(function () {
+                    document.getElementById("toast").classList.remove("reveal")
+                }, 1000)
+            toast.classList.add("reveal"),
+                toast.innerText = string
         }
     </script>
 </head>

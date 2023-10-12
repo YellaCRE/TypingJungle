@@ -25,9 +25,11 @@
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
     <script>
         $(document).ready(function() {
+            home();
             top10();
         });
 
@@ -49,8 +51,47 @@
             })
         }
 
+        // 홈 이동
+        function home(){
+            $.ajax({
+                type: "GET",
+                url: "/api/token",
+                data: {},
+                success: function(response){
+                    if(response['result'] == 'success'){
+                        toast('환영합니다');
+                    }
+                    else{
+                        alert('로그인 시간이 만료되었습니다.')
+                        window.location.href = '/'
+                    }
+                }
+            })
+        }
+        // 로그아웃
+        function logout(){
+            alert('로그아웃 되었습니다.')
+            $.removeCookie('mytoken')
+            window.location.href = '/'
+        }
+
+        // 게임 스타트
         function gamestart() {
             window.location.href = '/game'
+        }
+
+        function toast(string) {
+            const toast = document.getElementById("toast");
+        
+            toast.classList.contains("reveal") ?
+                (clearTimeout(removeToast), removeToast = setTimeout(function () {
+                    document.getElementById("toast").classList.remove("reveal")
+                }, 1000)) :
+                removeToast = setTimeout(function () {
+                    document.getElementById("toast").classList.remove("reveal")
+                }, 1000)
+            toast.classList.add("reveal"),
+                toast.innerText = string
         }
     </script>
 </head>
@@ -59,7 +100,7 @@
     <div class="nav">
         <span class="nav-logo">Typing Jungle</span>
         <div class="nav-btn">
-            <button>Log out</button>
+            <button onclick="logout()">Log out</button>
         </div>
     </div>
 
@@ -154,6 +195,8 @@
             </div>
         </div>
     </div>
+
+    <div id="toast"></div>
 
     <script>
         $('.btn-tutorial').click(function () {

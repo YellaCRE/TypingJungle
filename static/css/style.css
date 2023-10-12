@@ -8,8 +8,8 @@
     font-display: swap;
 }
 
-/* login, signup 페이지에 사용되는 css */
 .main{
+    /* height: calc(100% - 75px); */
     height: 90vh;
     width: 100%;
     margin: auto;
@@ -130,10 +130,20 @@ tr > *{
 
 .game{
     background-color: whitesmoke;
-    /* 색상은 사이즈 보려고 넣어둔 것. 수정 예정 */
+    border-radius: 10px;
     width: 500px;
     height: 450px;
     padding: 30px;
+}
+
+.container > h1 > span{
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+}
+
+.game-num{
+    margin: auto;
 }
 
 #toast {
@@ -172,7 +182,8 @@ thead th:not(:first-child), tbody td{
 
 .container{
     width: 80%; min-width: 320px; max-width: 640px;
-    margin: 10px auto; padding: 5px 0 15px;
-    text-align: center; border: 1px solid white;
+    margin: 10px auto; 
+    padding: 5px 0 15px;
+    text-align: center;
     border-radius: 16px;
   }

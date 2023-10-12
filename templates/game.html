@@ -160,9 +160,10 @@
         }
 
         // 엔터키가 눌렸을 때
-        function enterkey() {
-            if (window.event.keyCode == 13) {
-               submit();
+        function checkEnter(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault(); 
+                submit();
             }
         }
 
@@ -184,51 +185,51 @@
 </head>
 
 <body style="background-color:black;">
-    <nav class="navbar bg-body-tertiary justify-content-between" style="height: 75px; background-color: black; box-shadow: 0px 0px 50px rgb(131, 131, 131);">
+    <nav class="navbar bg-body-tertiary justify-content-between"
+        style="height: 75px; background-color: black; box-shadow: 0px 0px 50px rgb(131, 131, 131);">
         <a class="navbar-brand">
             <img src="{{ url_for('static', filename='typing-jungle_logo_removebg.png') }}" height="35px"
                 onClick="gohome()">
         </a>
         <div class="form-inline">
-            <span class="navbar-text text-success" id="nav_name" style="margin-right: 10px; font-weight: bold;">${userid} 님</span>
+            <span class="navbar-text text-success" id="nav_name"
+                style="margin-right: 10px; font-weight: bold;">${userid} 님</span>
             <button class="btn btn-outline-success btn-sm my-2 my-sm-0" type="" onclick="logout()">Log out</button>
         </div>
     </nav>
 
     <div class="main">
-        <div class="game">
-            <div class="container" >
+        <div class="game d-flex align-items-end flex-column mb-3">
+            <div class="container p-2">
                 <h1 style="color: var(--green)">
                     <span id="minutes">00</span>:<span id="seconds">00</span>:<span id="tenMillis">00</span>
                 </h1>
             </div>
 
-            <div class="game-form">
-                <div class="form-group" id="game-form">
-                    <label for="game-problem">문제</label>
-                    <input type="text" class="form-control" id="game-problem" value="3초 후에 시작됩니다." onpaste="return false;" oncopy="return false;" oncut="return false;" readonly>
+            <div class="p-2 container">
+                <div class="mb-3" style="margin-top: 1rem;">
+                    <textarea class="form-control" id="game-problem" rows="2" onpaste="return false;" oncopy="return false;" oncut="return false;" readonly>3초 후에 시작됩니다.</textarea>
                 </div>
-                <div class="form-group">
-                    <label for="game-ans">답안</label>
-                    <input type="text" class="form-control" id="game-ans" onkeyup="enterkey()" onpaste="return false;" oncopy="return false;" oncut="return false;">
-                    <!-- js에서 document.getElementById('game-ans')의 value 값 얻어오면 됨. -->
+                <div class="mb-3">
+                    <textarea class="form-control" id="game-ans" rows="2" placeholder="Type the sentence above!" onkeydown="checkEnter(event)" onpaste="return false;" oncopy="return false;" oncut="return false;"></textarea>
                 </div>
             </div>
 
-            <div class="container text-center">
-                <div class="d-flex flex-row-reverse">
-                  <div class="row">
-                    <h5 class="game-num" style="margin-right:20px;">푼 문제 수:
-                        <span id="solved_cnt">0</span> / <span id="question_cnt">3</span>
-                    </h5>
-                    <button class="btn btn-success" id="game-ans-btn" onclick="submit()">Next</button>
-                  </div>
+            <div class="mt-auto p-2 container text-center">
+                <div class="d-flex">
+                    <div class="p-2">
+                        <h5 class="game-num" style="margin-right:20px;">푼 문제 수:
+                            <span id="solved_cnt">0</span> / <span id="question_cnt">3</span>
+                        </h5>
+                    </div>
+                    <div class="ml-auto p-2">
+                        <button class="btn btn-success" id="game-ans-btn" onclick="submit()">Next</button>
+                    </div>
                 </div>
-              </div>
-        </div>
+            </div>
 
-        <div id="toast"></div>
-    </div>
+            <div id="toast"></div>
+        </div>
 </body>
 
 </html>

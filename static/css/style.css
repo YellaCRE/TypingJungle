@@ -130,6 +130,14 @@ tr > *{
     text-align: center;
 }
 
+.game{
+    background-color: whitesmoke;
+    /* 색상은 사이즈 보려고 넣어둔 것. 수정 예정 */
+    width: 500px;
+    height: 450px;
+    padding: 30px;
+}
+
 #record{
     height: 130px;
     line-height: 130px;

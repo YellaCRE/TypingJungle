@@ -54,11 +54,30 @@
               document.getElementById("seconds").textContent = "00"    
             }
         }
-
+        
+        let cnt = 0;
         function submit(){
-            window.location.href = '/result'
+            toast('틀렸습니다!');
+            cnt++;
+            document.getElementById("solved_cnt").textContent = cnt;
+            if(cnt == 3){
+                window.location.href = '/result'
+            }
         }
 
+        function toast(string) {
+            const toast = document.getElementById("toast");
+        
+            toast.classList.contains("reveal") ?
+                (clearTimeout(removeToast), removeToast = setTimeout(function () {
+                    document.getElementById("toast").classList.remove("reveal")
+                }, 1000)) :
+                removeToast = setTimeout(function () {
+                    document.getElementById("toast").classList.remove("reveal")
+                }, 1000)
+            toast.classList.add("reveal"),
+                toast.innerText = string
+        }
     </script>
 </head>
 
@@ -86,7 +105,9 @@
                     <div id="game-time">경과 시간 : 
                         <span id="minutes">00</span>:<span id="seconds">00</span>:<span id="tenMillis">00</span>
                     </div>
-                    <div class="game-num">/</div>
+                    <div class="game-num">문제 수:
+                        <span id="solved_cnt">0</span> / <span id="question_cnt">3</span>
+                    </div>
                   </div>
                   <div class="col">
                   </div>
@@ -96,6 +117,8 @@
                 </div>
               </div>
         </div>
+
+        <div id="toast"></div>
     </div>
 </body>
 

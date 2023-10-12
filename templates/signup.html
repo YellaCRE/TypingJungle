@@ -27,6 +27,7 @@
     ></script>
 
     <script>
+        // 회원가입 함수
         function signup() {
             $.ajax({
                 type: "POST",
@@ -39,7 +40,7 @@
                 success: function (response) {
                     if (response['result'] == 'success') {
                         alert('회원가입이 완료되었습니다.')
-                        window.location.href = '/home'
+                        window.location.href = '/'
                     } else {
                         alert(response['msg'])
                     }
@@ -47,6 +48,7 @@
             })
         }
 
+        // 토스트 함수
         function toast(string) {
             const toast = document.getElementById("toast");
         
@@ -75,7 +77,7 @@
             <span>Jungle</span>
         </div>
 
-        <form>
+        <div>
             <div>
                 <input type="text" id="userid" required placeholder="아이디를 입력하세요">
             </div>
@@ -88,7 +90,7 @@
             <div class="btn">
                 <button class="btn-signUp" onclick="signup()">Sign up</button>
             </div>
-        </form>
+        </div>
     </div>
 </body>
 

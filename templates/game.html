@@ -28,17 +28,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
     <script>
-        let tenMillis = 0;
-        let minutes = 0;
-        let seconds = 0;
-        let intervalId;
-
         $(document).ready(function() {
             game_page();
             clearInterval(intervalId);
             intervalId = setInterval(operateTimer, 10);
         });
         
+        let tenMillis = 0;
+        let minutes = 0;
+        let seconds = 0;
+        let name;
+        let intervalId;
+
         // 로그인 확인
         function game_page(){
             $.ajax({
@@ -47,6 +48,7 @@
                 data: {},
                 success: function(response){
                     if(response['result'] == 'success'){
+                        name = response['id']
                     }
                     else{
                         alert('로그인 시간이 만료되었습니다.')
@@ -60,7 +62,7 @@
         // 10ms 마다 시간에 대한 숫자가 증가한다!
         function operateTimer(){
             tenMillis++;
-            document.getElementById("tenMillis").textContent = tenMillis > 9 ? tenMillis : '0' + tenMillis
+            document.getElementById("tenMillis").textContent = tenMillis > 9 ?tenMillis : '0' + tenMillis
             if(tenMillis > 99){
               seconds++;
               document.getElementById("seconds").textContent = seconds > 9 ? seconds : '0' + seconds
@@ -71,21 +73,46 @@
               minutes++;
               document.getElementById("minutes").textContent = minutes > 9 ? minutes : '0' + minutes
               seconds = 0
-              document.getElementById("seconds").textContent = "00"    
+              document.getElementById("seconds").textContent = "00" 
             }
         }
         
         // 답안 제출
         let cnt = 0;
         function submit(){
-            toast('틀렸습니다!');
+            if (document.getElementById("game-problem").value != $('#game-ans').val()){
+                toast('틀렸습니다!');
+                return
+            }
+            
             cnt++;
             document.getElementById("solved_cnt").textContent = cnt;
             if(cnt >= 3){
-                window.location.href = '/result'
+                saveResult();
             }
         }
         
+        function saveResult() {
+            let result = parseInt(document.getElementById("minutes").textContent) * 6000 + parseInt(document.getElementById("seconds").textContent) * 100 +
+            parseInt(document.getElementById("tenMillis").textContent)
+            $.ajax({
+                type: "POST",
+                url: "/api/log",
+                data: {
+                    id_give: name,
+                    score_give: result
+                },
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        window.location.href = '/result'
+                    } else {
+                        alert('결과 저장 실패')
+                        window.location.href = '/home'
+                    }
+                }
+            })
+        }
+
         // 로그아웃
         function logout(){
             alert('로그아웃 되었습니다.')

@@ -6,7 +6,18 @@ app = Flask(__name__)
 
 # MongoDB
 client = MongoClient('localhost', 27017)
-db = client.typejungle  
+db = client.typejungle
+
+# userDB
+db.users.drop()
+db.users.insert_one({'id': 'admin', 'pw': 'admin'})
+
+# rankingDB
+db.ranking.drop()
+db.ranking.insert_one({'id': 'bot1','score': 500})
+db.ranking.insert_one({'id': 'bot2','score': 1000})
+db.ranking.insert_one({'id': 'bot3','score': 2000})
+
 SECRET_KEY = "JUNGLE"
 
 # [html 뷰어]
@@ -63,7 +74,7 @@ def api_login():
     if result:
         payload = {
             'id': id_receive,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=30)
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=1000)
         }
         # token을 클라이언트에게 전달.
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
@@ -80,12 +91,7 @@ def api_valid():
     try:
         # token을 시크릿키로 디코딩
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        print(payload)
-        print(token_receive)
-        # payload 안에 id가 들어있습니다. 이 id로 유저정보를 찾습니다.
-        # 여기에선 그 예로 닉네임을 보내주겠습니다.
-        userinfo = db.users.find_one({'id': payload['id']}, {'_id': 0})
-        return jsonify({'result': 'success', 'id': userinfo['id']})
+        return jsonify({'result': 'success', 'id': payload['id']})
     except jwt.ExpiredSignatureError:
         # 위를 실행했는데 만료시간이 지났으면 에러가 납니다.
         return jsonify({'result': 'fail', 'msg': '로그인 시간이 만료되었습니다.'})
@@ -108,20 +114,29 @@ def api_rank():
     for doc in list(cursor):
         for id in doc['unique_ids'][1:]:
             db.ranking.delete_one({'_id': id})
-    
-    ranking_ls = list(db.ranking.find({}, {'_id': False}).sort("score"))
+
+    ranking_ls = list(db.ranking.find({}, {'_id': False}).sort('score', 1))
     if len(ranking_ls) > 10:
         top10_ls = ranking_ls[:10]
     else:
         top10_ls = ranking_ls
     return jsonify({'rank': top10_ls})
 
+# [로그 API]
+@app.route('/api/log', methods=['POST'])
+def api_log():
+    id_receive = request.form['id_give']
+    score_receive = int(request.form['score_give'])
+    db.log.insert_one({'id':id_receive, 'score': score_receive, 'time': datetime.datetime.now()})
+    db.ranking.insert_one({'id': id_receive, 'score': score_receive})
+    return jsonify({'result': 'success'})
+
 # [결과 API]
 @app.route('/api/score', methods=['GET'])
 def api_score():
-    name = request.args.get('id')
-    score = db.log.find_one({'id':name}, {'_id': False})
-    return jsonify({'score': score})
+    name = request.args.get('id_give')
+    score = list(db.log.find({'id':name}, {'_id': False}))
+    return jsonify({'score': score[-1]})
 
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', port = 5001, debug = True)

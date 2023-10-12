@@ -30,24 +30,41 @@
 
     <script>
         $(document).ready(function () {
-            game_page();
+            result_page();
             top10();
-            getScore();
         });
 
         // 로그인 확인
-        function game_page(){
+        let name;
+        function result_page(){
             $.ajax({
                 type: "GET",
                 url: "/api/token",
                 data: {},
                 success: function(response){
                     if(response['result'] == 'success'){
+                        name = response['id']
+                        getScore(name)
                     }
                     else{
                         alert('로그인 시간이 만료되었습니다.')
                         window.location.href = '/'
                     }
+                }
+            })
+        }
+
+        // 결과 확인
+        function getScore(name) {
+            $.ajax({
+                type: "GET",
+                url: "/api/score",
+                data: {id_give: name},
+                success: function (response) {
+                    var time = response['score']['score']
+                    var sec = Math.floor(time/100)
+                    var ms = Math.floor(time%100)
+                    $('#record').append(sec + '.' + ms +' sec')
                 }
             })
         }
@@ -63,25 +80,10 @@
                     for(let i = 0; i<rows.length; i++){
                         $('#top'+(i+1)+'-pid').append(rows[i]['id'])
                         var time = rows[i]['score']
-                        var min = Math.floor(time/60)
-                        var sec = Math.floor(time%60)
-                        $('#top'+(i+1)+'-record').append(min +'분 ' + sec + '초')
+                        var sec = Math.floor(time/100)
+                        var ms = Math.floor(time%100)
+                        $('#top'+(i+1)+'-record').append(sec + '.' + ms +' sec')
                     }
-                }
-            })
-        }
-
-        // 결과 확인
-        function getScore() {
-            $.ajax({
-                type: "GET",
-                url: "/api/score",
-                data: {'id': 'user1'},
-                success: function (response) {
-                    var time = response['score']['score']
-                    var min = Math.floor(time/60)
-                    var sec = Math.floor(time%60)
-                    $('#record').append(min +'분 ' + sec + '초')
                 }
             })
         }

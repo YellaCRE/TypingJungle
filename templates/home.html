@@ -41,7 +41,6 @@
                 data: {},
                 success: function(response){
                     if(response['result'] == 'success'){
-                        toast('환영합니다');
                     }
                     else{
                         alert('로그인 시간이 만료되었습니다.')
@@ -50,7 +49,6 @@
                 }
             })
         }
-
         // 랭킹 업데이트
         function top10() {
             $.ajax({
@@ -62,9 +60,9 @@
                     for(let i = 0; i<rows.length; i++){
                         $('#top'+(i+1)+'-pid').append(rows[i]['id'])
                         var time = rows[i]['score']
-                        var min = Math.floor(time/60)
-                        var sec = Math.floor(time%60)
-                        $('#top'+(i+1)+'-record').append(min +'분 ' + sec + '초')
+                        var sec = Math.floor(time/100)
+                        var ms = Math.floor(time%100)
+                        $('#top'+(i+1)+'-record').append(sec + '.' + ms +' sec')
                     }
                 }
             })
@@ -80,21 +78,6 @@
             alert('로그아웃 되었습니다.')
             $.removeCookie('mytoken')
             window.location.href = '/'
-        }
-
-        // 토스트 함수
-        function toast(string) {
-            const toast = document.getElementById("toast");
-        
-            toast.classList.contains("reveal") ?
-                (clearTimeout(removeToast), removeToast = setTimeout(function () {
-                    document.getElementById("toast").classList.remove("reveal")
-                }, 1000)) :
-                removeToast = setTimeout(function () {
-                    document.getElementById("toast").classList.remove("reveal")
-                }, 1000)
-            toast.classList.add("reveal"),
-                toast.innerText = string
         }
     </script>
 </head>

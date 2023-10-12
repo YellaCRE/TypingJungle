@@ -42,6 +42,12 @@ def api_signup():
     pw_receive = request.form['pw_give']
     check_receive = request.form['check_give']
     
+    if not id_receive:
+        return jsonify({'result': 'fail', 'msg': '아이디를 입력해주세요'})
+    
+    if not pw_receive:
+        return jsonify({'result': 'fail', 'msg': '비밀번호를 입력해주세요'})
+    
     if pw_receive != check_receive:
         return jsonify({'result': 'fail', 'msg': '비밀번호를 다시 확인해주세요'})
     

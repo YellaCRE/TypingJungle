@@ -39,7 +39,7 @@
                 success: function (response) {
                     let rows = response['rank']
                     for(let i = 0; i<rows.length; i++){
-                        $('#top'+(i+1)+'-pid').append(rows[i]['name'])
+                        $('#top'+(i+1)+'-pid').append(rows[i]['id'])
                         var time = rows[i]['score']
                         var min = Math.floor(time/60)
                         var sec = Math.floor(time%60)

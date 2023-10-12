@@ -39,9 +39,16 @@ def result():
 def api_signup():
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']
-    nickname_receive = request.form['nickname_give']
+    check_receive = request.form['check_give']
     
-    db.users.insert_one({'id': id_receive, 'pw': pw_receive, 'name': nickname_receive})
+    if pw_receive != check_receive:
+        return jsonify({'result': 'fail', 'msg': '비밀번호를 다시 확인해주세요'})
+    
+    check = db.users.find_one({'id': id_receive})
+    if check is not None:
+        return jsonify({'result': 'fail', 'msg': '중복된 id가 존재합니다'})
+        
+    db.users.insert_one({'id': id_receive, 'pw': pw_receive})
     return jsonify({'result': 'success'})
 
 
@@ -64,7 +71,7 @@ def api_rank():
     cursor = db.ranking.aggregate([
         {"$sort": {"score": 1}},
         {"$group": {
-            "_id": "$name",
+            "_id": "$id",
             "unique_ids": {"$addToSet": "$_id"},
             "count": {"$sum": 1}
             }},
@@ -83,10 +90,11 @@ def api_rank():
     
     return jsonify({'rank': top10_ls})
 
+# [결과 API]
 @app.route('/api/score', methods=['GET'])
 def api_score():
-    name = request.args.get('name')
-    score = db.log.find_one({'name':name}, {'_id': False})
+    name = request.args.get('id')
+    score = db.log.find_one({'id':name}, {'_id': False})
     return jsonify({'score': score})
 
 if __name__ == '__main__':

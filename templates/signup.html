@@ -17,7 +17,7 @@
                 data: {
                     id_give: $('#userid').val(),
                     pw_give: $('#userpw').val(),
-                    nickname_give: $('#usernick').val()
+                    check_give: $('#checkpw').val()
                 },
                 success: function (response) {
                     if (response['result'] == 'success') {
@@ -52,7 +52,7 @@
                 <input type="password" id="userpw" required placeholder="비밀번호를 입력하세요">
             </div>
             <div>
-                <input type="text" id="usernick" required placeholder="닉네임을 입력하세요">
+                <input type="password" id="checkpw" required placeholder="비밀번호를 한 번 더 입력하세요">
             </div>
             <div class="btn">
                 <button class="btn-signUp" onclick="signup()">Sign up</button>

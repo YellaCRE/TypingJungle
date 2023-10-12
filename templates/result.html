@@ -44,7 +44,7 @@
                 success: function(response){
                     if(response['result'] == 'success'){
                         name = response['id']
-                        document.getElementById("dropdownMenuButton").textContent = name;
+                        document.getElementById("nav_name").textContent = name+" 님";
                         getScore(name)
                     }
                     else{
@@ -108,30 +108,21 @@
     </script>
 </head>
 
-<body>
-    <nav class="navbar bg-body-tertiary justify-content-between" style="height: 10vh;">
+<body style="background-color:black;">
+    <nav class="navbar bg-body-tertiary justify-content-between" style="height: 75px; background-color: black; box-shadow: 0px 0px 50px rgb(131, 131, 131);">
         <a class="navbar-brand">
-            <img src="{{ url_for('static', filename='typing-jungle_logo.png') }}" height="30px"
+            <img src="{{ url_for('static', filename='typing-jungle_logo_removebg.png') }}" height="35px"
                 onClick="gohome()">
         </a>
         <div class="form-inline">
-            <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
-            <div class="dropdown mr-sm-2">
-                <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    userid
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">My page</a>
-                </div>
-            </div>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="" onclick="logout()">Log out</button>
+            <span class="navbar-text text-success" id="nav_name" style="margin-right: 10px; font-weight: bold;">${userid} 님</span>
+            <button class="btn btn-outline-success btn-sm my-2 my-sm-0" type="" onclick="logout()">Log out</button>
         </div>
     </nav>
 
     <div class="main">
         <div class="result-content">
-            <div class="record-box">
+            <div class="record-box" style="background-color:white; box-shadow: 5px 5px 5px 5px grey inset">
                 <div class="record-text">YOUR RECORD</div>
                 <div id="record"></div>
             </div>
@@ -209,10 +200,10 @@
 
         <div class="row justify-content-evenly" id="result-footer">
             <div class="col-4">
-                <button onclick="gamestart()">Retry</button> 
+                <button class="btn btn-outline-success btn-lg" style="margin-right: 5em;" onclick="gamestart()">Retry</button> 
             </div>
             <div class="col-4">
-                <button onclick="gohome()">Home</button>
+                <button class="btn btn-outline-success btn-lg" onclick="gohome()">Home</button>
             </div>
         </div>
     </div>

@@ -58,7 +58,7 @@
                 success: function(response){
                     if(response['result'] == 'success'){
                         name = response['id']
-                        document.getElementById("dropdownMenuButton").textContent = name;
+                        document.getElementById("nav_name").textContent = name+" 님";
                     }
                     else{
                         alert('로그인 시간이 만료되었습니다.')
@@ -141,6 +141,11 @@
             window.location.href = '/'
         }
 
+        // 홈 이동
+        function gohome() {
+            window.location.href = '/home'
+        }
+
         // 엔터키가 눌렸을 때
         function enterkey() {
             if (window.event.keyCode == 13) {
@@ -165,55 +170,45 @@
     </script>
 </head>
 
-<body>
-    <nav class="navbar bg-body-tertiary justify-content-between" style="height: 10vh;">
+<body style="background-color:black;">
+    <nav class="navbar bg-body-tertiary justify-content-between" style="height: 75px; background-color: black; box-shadow: 0px 0px 50px rgb(131, 131, 131);">
         <a class="navbar-brand">
-            <img src="{{ url_for('static', filename='typing-jungle_logo.png') }}" height="30px"
+            <img src="{{ url_for('static', filename='typing-jungle_logo_removebg.png') }}" height="35px"
                 onClick="gohome()">
         </a>
         <div class="form-inline">
-            <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
-            <div class="dropdown mr-sm-2">
-                <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    userid
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">My page</a>
-                </div>
-            </div>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="" onclick="logout()">Log out</button>
+            <span class="navbar-text text-success" id="nav_name" style="margin-right: 10px; font-weight: bold;">${userid} 님</span>
+            <button class="btn btn-outline-success btn-sm my-2 my-sm-0" type="" onclick="logout()">Log out</button>
         </div>
     </nav>
 
     <div class="main">
         <div class="game">
+            <div class="container" >
+                <h1 style="color: var(--green)">
+                    <span id="minutes">00</span>:<span id="seconds">00</span>:<span id="tenMillis">00</span>
+                </h1>
+            </div>
+
             <div class="game-form">
                 <div class="form-group" id="game-form">
-                    <!-- value에 문제 문장 넣기 -->
-                  <input type="text" class="form-control" id="game-problem" value="3초 후에 시작됩니다." onpaste="return false;" oncopy="return false;" oncut="return false;" readonly>
+                    <label for="game-problem">문제</label>
+                    <input type="text" class="form-control" id="game-problem" value="3초 후에 시작됩니다." onpaste="return false;" oncopy="return false;" oncut="return false;" readonly>
                 </div>
                 <div class="form-group">
-                  <label for="game-ans">Type the sentence above!</label>
-                  <input type="text" class="form-control" id="game-ans" onkeyup="enterkey()" onpaste="return false;" oncopy="return false;" oncut="return false;">
-                  <!-- js에서 document.getElementById('game-ans')의 value 값 얻어오면 됨. -->
+                    <label for="game-ans">답안</label>
+                    <input type="text" class="form-control" id="game-ans" onkeyup="enterkey()" onpaste="return false;" oncopy="return false;" oncut="return false;">
+                    <!-- js에서 document.getElementById('game-ans')의 value 값 얻어오면 됨. -->
                 </div>
             </div>
 
             <div class="container text-center">
-                <div class="row align-items-end">
-                  <div class="col">
-                    <div id="game-time">경과 시간 : 
-                        <span id="minutes">00</span>:<span id="seconds">00</span>:<span id="tenMillis">00</span>
-                    </div>
-                    <div class="game-num">문제 수:
+                <div class="d-flex flex-row-reverse">
+                  <div class="row">
+                    <h5 class="game-num" style="margin-right:20px;">푼 문제 수:
                         <span id="solved_cnt">0</span> / <span id="question_cnt">3</span>
-                    </div>
-                  </div>
-                  <div class="col">
-                  </div>
-                  <div class="col">
-                    <button id="game-ans-btn" onclick="submit()">Next</button>
+                    </h5>
+                    <button class="btn btn-success" id="game-ans-btn" onclick="submit()">Next</button>
                   </div>
                 </div>
               </div>

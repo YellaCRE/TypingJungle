@@ -42,7 +42,7 @@
                 success: function(response){
                     if(response['result'] == 'success'){
                         name = response['id']
-                        document.getElementById("dropdownMenuButton").textContent = name;
+                        document.getElementById("nav_name").textContent = name+" 님";
                     }
                     else{
                         alert('로그인 시간이 만료되었습니다.')
@@ -84,105 +84,108 @@
     </script>
 </head>
 
-<body>
-    <nav class="navbar bg-body-tertiary justify-content-between" style="height: 10vh;">
+<body style="background-color:black;">
+    <nav class="navbar bg-body-tertiary justify-content-between" style="height: 75px; background-color: black; box-shadow: 0px 0px 50px rgb(131, 131, 131);">
         <a class="navbar-brand">
-            <img src="{{ url_for('static', filename='typing-jungle_logo.png') }}" height="30px"
-                onClick="window.location.reload()">
+            <img src="{{ url_for('static', filename='typing-jungle_logo_removebg.png') }}" height="35px"
+                onClick="gohome()">
         </a>
         <div class="form-inline">
-            <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
-            <div class="dropdown mr-sm-2">
-                <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    userid
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">My page</a>
-                </div>
-            </div>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="" onclick="logout()">Log out</button>
+            <span class="navbar-text text-success" id="nav_name" style="margin-right: 10px; font-weight: bold;">${userid} 님</span>
+            <button class="btn btn-outline-success btn-sm my-2 my-sm-0" type="" onclick="logout()">Log out</button>
         </div>
     </nav>
 
     <div class="main">
-        <div class="ranking">
-            <div class="ranking-title">명예의 전당</div>
-            <!-- top 10 랭킹 뜨도록 구현 -->
-            <div class="ranking-table">
-                <table class="table table-sm">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col" class="text-center">Rank</th>
-                            <th scope="col" class="text-center">Nickname</th>
-                            <th scope="col" class="text-center">Best Record</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row" class="text-center">1</th>
-                            <td id="top1-pid" class="text-center"></td>
-                            <td id="top1-record" class="text-center"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-center">2</th>
-                            <td id="top2-pid" class="text-center"></td>
-                            <td id="top2-record" class="text-center"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-center">3</th>
-                            <td id="top3-pid" class="text-center"></td>
-                            <td id="top3-record" class="text-center"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-center">4</th>
-                            <td id="top4-pid" class="text-center"></td>
-                            <td id="top4-record" class="text-center"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-center">5</th>
-                            <td id="top5-pid" class="text-center"></td>
-                            <td id="top5-record" class="text-center"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-center">6</th>
-                            <td id="top6-pid" class="text-center"></td>
-                            <td id="top6-record" class="text-center"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-center">7</th>
-                            <td id="top7-pid" class="text-center"></td>
-                            <td id="top7-record" class="text-center"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-center">8</th>
-                            <td id="top8-pid" class="text-center"></td>
-                            <td id="top8-record" class="text-center"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-center">9</th>
-                            <td id="top9-pid" class="text-center"></td>
-                            <td id="top9-record" class="text-center"></td>
-                        </tr>
-                        <tr>
-                            <th scope="row" class="text-center">10</th>
-                            <td id="top10-pid" class="text-center"></td>
-                            <td id="top10-record" class="text-center"></td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div style="width: 60%;">
+            <div style="width: 50%; float:left;">
+                <img src="{{ url_for('static', filename='profile.png') }}" height="100px">
 
+                <h2 style="font-family: 'BMDoHyeon'; color:var(--green);">
+                    Typing Jungle
+                </h2>
+            </div>
+
+            <div class="ranking" style="width: 50%; float:right;">
+                <div class="ranking-title">명예의 전당</div>
+                <!-- top 10 랭킹 뜨도록 구현 -->
+                <div class="ranking-table">
+                    <table class="table table-sm">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" class="text-center">Rank</th>
+                                <th scope="col" class="text-center">Nickname</th>
+                                <th scope="col" class="text-center">Best Record</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="text-center">1</th>
+                                <td id="top1-pid" class="text-center"></td>
+                                <td id="top1-record" class="text-center"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">2</th>
+                                <td id="top2-pid" class="text-center"></td>
+                                <td id="top2-record" class="text-center"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">3</th>
+                                <td id="top3-pid" class="text-center"></td>
+                                <td id="top3-record" class="text-center"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">4</th>
+                                <td id="top4-pid" class="text-center"></td>
+                                <td id="top4-record" class="text-center"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">5</th>
+                                <td id="top5-pid" class="text-center"></td>
+                                <td id="top5-record" class="text-center"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">6</th>
+                                <td id="top6-pid" class="text-center"></td>
+                                <td id="top6-record" class="text-center"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">7</th>
+                                <td id="top7-pid" class="text-center"></td>
+                                <td id="top7-record" class="text-center"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">8</th>
+                                <td id="top8-pid" class="text-center"></td>
+                                <td id="top8-record" class="text-center"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">9</th>
+                                <td id="top9-pid" class="text-center"></td>
+                                <td id="top9-record" class="text-center"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="text-center">10</th>
+                                <td id="top10-pid" class="text-center"></td>
+                                <td id="top10-record" class="text-center"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
         </div>
+
         <div>
-            <button class="btn-game" onclick="gamestart()">Game start</button>
+            <button class="btn btn-success btn-lg" style="margin-bottom: 10px;" onclick="gamestart()">Game start</button>
             <!-- 누르면 game page로 이동 -->
         </div>
+
         <div>
-            <button class="btn-tutorial">Tutorial</button>
+            <button class="btn btn-outline-success btn-lg" id="btn-tutorial" >Tutorial</button>
             <div class="modal">
                 <div class="modal-content">
-                    <a class="btn-close">✖</a>
+                    <a id="btn-close">✖</a>
                     <h2>How to play<br>Typing Jungle</h2>
                     <p>
                         좌측의 문제와 동일한 문장을 우측 답안란에 작성하세요.<br>
@@ -200,10 +203,10 @@
     <div id="toast"></div>
 
     <script>
-        $('.btn-tutorial').click(function () {
+        $('#btn-tutorial').click(function () {
             $('.modal').fadeIn()
         })
-        $('.btn-close').click(function () {
+        $('#btn-close').click(function () {
             $('.modal').fadeOut()
         })
     </script>

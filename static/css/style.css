@@ -1,5 +1,12 @@
 @import "reset.css";
 @import "variables.css";    /* 자주 사용하는 색상 변수화 */
+@font-face {
+    font-family: 'BMDoHyeon';
+    font-weight: normal; 
+    font-style: normal; 
+    src: url(https://cdn.jsdelivr.net/gh/webfontworld/woowahan/BMDoHyeon.woff2) format('woff2');
+    font-display: swap;
+}
 
 /* login, signup 페이지에 사용되는 css */
 .main{
@@ -155,3 +162,10 @@ thead th:not(:first-child), tbody td{
     box-sizing: border-box;
     text-align: center;
 }
+
+.container{
+    width: 80%; min-width: 320px; max-width: 640px;
+    margin: 10px auto; padding: 5px 0 15px;
+    text-align: center; border: 1px solid white;
+    border-radius: 16px;
+  }

@@ -31,21 +31,20 @@
             top10();
         });
 
-
         function top10() {
             $.ajax({
                 type: "GET",
                 url: "/api/rank",
                 data: {},
                 success: function (response) {
-                    for(let i = 0; i<response['rank'].length; i++){
-                        $('#top'+(i+1)+'-pid').append(response['name'][i]['name'])
-                        var time = response['rank'][i]['score']
+                    let rows = response['rank']
+                    for(let i = 0; i<rows.length; i++){
+                        $('#top'+(i+1)+'-pid').append(rows[i]['name'])
+                        var time = rows[i]['score']
                         var min = Math.floor(time/60)
                         var sec = Math.floor(time%60)
                         $('#top'+(i+1)+'-record').append(min +'분 ' + sec + '초')
                     }
-                    
                 }
             })
         }

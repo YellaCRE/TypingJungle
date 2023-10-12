@@ -41,7 +41,7 @@ def api_signup():
     pw_receive = request.form['pw_give']
     nickname_receive = request.form['nickname_give']
     
-    db.users.insert_one({'pid': 1234,'id': id_receive, 'pw': pw_receive, 'name': nickname_receive})
+    db.users.insert_one({'id': id_receive, 'pw': pw_receive, 'name': nickname_receive})
     return jsonify({'result': 'success'})
 
 
@@ -61,26 +61,32 @@ def api_login():
 # [랭킹 API]
 @app.route('/api/rank', methods=['GET'])
 def api_rank():
-    ranking_ls = list(db.ranking.find({}, {'_id': False}))
-    ranking_ls = sorted(ranking_ls, key=lambda x: x['score'])
+    cursor = db.ranking.aggregate([
+        {"$sort": {"score": 1}},
+        {"$group": {
+            "_id": "$name",
+            "unique_ids": {"$addToSet": "$_id"},
+            "count": {"$sum": 1}
+            }},
+        {"$match": {"count": { "$gte": 2 }}}
+    ])
+    
+    for doc in list(cursor):
+        for id in doc['unique_ids'][1:]:
+            db.ranking.delete_one({'_id': id})
+    
+    ranking_ls = list(db.ranking.find({}, {'_id': False}).sort("score"))
     if len(ranking_ls) > 10:
         top10_ls = ranking_ls[:10]
     else:
         top10_ls = ranking_ls
     
-    name_ls = []
-    for di in top10_ls:
-        tmp = db.users.find_one({'pid': di['pid']}, {'_id': False})
-        name_ls.append(tmp)
-    
-    print(name_ls)
-    return jsonify({'rank': top10_ls, 'name': name_ls})
+    return jsonify({'rank': top10_ls})
 
 @app.route('/api/score', methods=['GET'])
 def api_score():
-    pid = request.args.get('pid')
-    score = db.log.find_one({'pid':pid}, {'_id': False})
-    print(score)
+    name = request.args.get('name')
+    score = db.log.find_one({'name':name}, {'_id': False})
     return jsonify({'score': score})
 
 if __name__ == '__main__':

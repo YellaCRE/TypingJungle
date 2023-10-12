@@ -30,6 +30,8 @@
     <script>
         $(document).ready(function() {
             game_page();
+            alert('준비가 되면 확인을 눌러주세요.')
+            question(0);
             clearInterval(intervalId);
             intervalId = setInterval(operateTimer, 10);
         });
@@ -58,6 +60,15 @@
             })
         }
 
+        function question(i){
+            let q_ls = [
+            '잊지 마라, 네 인생의 주인은 너다.',
+            '동료의 코드리뷰와 피드백을 감사히 여기자.',
+            '물어보기 전에 최선의 내 답을 먼저 찾자.',
+            '끝!'
+            ]
+            document.getElementById("game-problem").value = q_ls[i]
+        }
         // 타이머
         // 10ms 마다 시간에 대한 숫자가 증가한다!
         function operateTimer(){
@@ -86,6 +97,8 @@
             }
             
             cnt++;
+            question(cnt)
+            document.getElementById("game-ans").value = null;
             document.getElementById("solved_cnt").textContent = cnt;
             if(cnt >= 3){
                 saveResult();
@@ -120,6 +133,13 @@
             window.location.href = '/'
         }
 
+        // 엔터키가 눌렸을 때
+        function enterkey() {
+            if (window.event.keyCode == 13) {
+               submit();
+            }
+        }
+
         // 토스트 함수
         function toast(string) {
             const toast = document.getElementById("toast");
@@ -147,11 +167,11 @@
             <div class="game-form">
                 <div class="form-group" id="game-form">
                     <!-- value에 문제 문장 넣기 -->
-                  <input type="text" class="form-control" id="game-problem" value="잊지 마라, 네 인생의 주인은 너다." onpaste="return false;" oncopy="return false;" oncut="return false;" readonly>
+                  <input type="text" class="form-control" id="game-problem" value="" onpaste="return false;" oncopy="return false;" oncut="return false;" readonly>
                 </div>
                 <div class="form-group">
                   <label for="game-ans">Type the sentence above!</label>
-                  <input type="text" class="form-control" id="game-ans" onpaste="return false;" oncopy="return false;" oncut="return false;">
+                  <input type="text" class="form-control" id="game-ans" onkeyup="enterkey()" onpaste="return false;" oncopy="return false;" oncut="return false;">
                   <!-- js에서 document.getElementById('game-ans')의 value 값 얻어오면 됨. -->
                 </div>
             </div>

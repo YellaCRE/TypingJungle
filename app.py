@@ -8,16 +8,6 @@ app = Flask(__name__)
 client = MongoClient('localhost', 27017)
 db = client.typejungle
 
-# userDB
-db.users.drop()
-db.users.insert_one({'id': 'admin', 'pw': 'admin'})
-
-# rankingDB
-db.ranking.drop()
-db.ranking.insert_one({'id': 'bot1','score': 500})
-db.ranking.insert_one({'id': 'bot2','score': 1000})
-db.ranking.insert_one({'id': 'bot3','score': 2000})
-
 SECRET_KEY = "JUNGLE"
 
 # [html 뷰어]
@@ -101,20 +91,6 @@ def api_valid():
 # [랭킹 API]
 @app.route('/api/rank', methods=['GET'])
 def api_rank():
-    cursor = db.ranking.aggregate([
-        {"$sort": {"score": 1}},
-        {"$group": {
-            "_id": "$id",
-            "unique_ids": {"$addToSet": "$_id"},
-            "count": {"$sum": 1}
-            }},
-        {"$match": {"count": { "$gte": 2 }}}
-    ])
-    
-    for doc in list(cursor):
-        for id in doc['unique_ids'][1:]:
-            db.ranking.delete_one({'_id': id})
-
     ranking_ls = list(db.ranking.find({}, {'_id': False}).sort('score', 1))
     if len(ranking_ls) > 10:
         top10_ls = ranking_ls[:10]
@@ -127,8 +103,12 @@ def api_rank():
 def api_log():
     id_receive = request.form['id_give']
     score_receive = int(request.form['score_give'])
+    result = db.ranking.find_one({'id':id_receive})
+    if result:
+        db.ranking.delete_one({'id': id_receive})
+        MIN = min(result['score'], score_receive)
+    db.ranking.insert_one({'id': id_receive, 'score': MIN})
     db.log.insert_one({'id':id_receive, 'score': score_receive, 'time': datetime.datetime.now()})
-    db.ranking.insert_one({'id': id_receive, 'score': score_receive})
     return jsonify({'result': 'success'})
 
 # [결과 API]

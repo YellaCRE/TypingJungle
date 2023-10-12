@@ -10,14 +10,12 @@ def mkdb():
     db.users.insert_one({'id': 'admin', 'pw': 'admin'})
 
     # rankingDB
+    db.ranking.insert_one({'id': 'bot1','score': 500})
+    db.ranking.insert_one({'id': 'bot2','score': 1000})
+    db.ranking.insert_one({'id': 'bot3','score': 2000})
+    db.ranking.insert_one({'id': 'bot4','score': 3000})
+    db.ranking.insert_one({'id': 'bot5','score': 4000})
 
-    db.ranking.insert_one({'id': 'bot1','score': 1000})
-    db.ranking.insert_one({'id': 'bot2','score': 2000})
-    db.ranking.insert_one({'id': 'bot3','score': 3000})
-    db.ranking.insert_one({'id': 'bot4','score': 4000})
-    db.ranking.insert_one({'id': 'bot5','score': 5000})
-
-    # logDB
 
 
 if __name__ == '__main__':

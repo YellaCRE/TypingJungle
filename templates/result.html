@@ -30,10 +30,29 @@
 
     <script>
         $(document).ready(function () {
+            game_page();
             top10();
             getScore();
         });
 
+        // 로그인 확인
+        function game_page(){
+            $.ajax({
+                type: "GET",
+                url: "/api/token",
+                data: {},
+                success: function(response){
+                    if(response['result'] == 'success'){
+                    }
+                    else{
+                        alert('로그인 시간이 만료되었습니다.')
+                        window.location.href = '/'
+                    }
+                }
+            })
+        }
+
+        // 랭킹 업데이트
         function top10() {
             $.ajax({
                 type: "GET",
@@ -52,6 +71,7 @@
             })
         }
 
+        // 결과 확인
         function getScore() {
             $.ajax({
                 type: "GET",
@@ -66,14 +86,17 @@
             })
         }
 
+        // 게임 시작
         function gamestart() {
             window.location.href = '/game'
         }
 
+        // 홈 이동
         function gohome() {
             window.location.href = '/home'
         }
-
+        
+        // 로그아웃
         function logout(){
             alert('로그아웃 되었습니다.')
             $.removeCookie('mytoken')

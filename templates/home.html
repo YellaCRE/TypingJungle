@@ -33,6 +33,25 @@
             top10();
         });
 
+        // 로그인 확인
+        function home(){
+            $.ajax({
+                type: "GET",
+                url: "/api/token",
+                data: {},
+                success: function(response){
+                    if(response['result'] == 'success'){
+                        toast('환영합니다');
+                    }
+                    else{
+                        alert('로그인 시간이 만료되었습니다.')
+                        window.location.href = '/'
+                    }
+                }
+            })
+        }
+
+        // 랭킹 업데이트
         function top10() {
             $.ajax({
                 type: "GET",
@@ -51,23 +70,11 @@
             })
         }
 
-        // 홈 이동
-        function home(){
-            $.ajax({
-                type: "GET",
-                url: "/api/token",
-                data: {},
-                success: function(response){
-                    if(response['result'] == 'success'){
-                        toast('환영합니다');
-                    }
-                    else{
-                        alert('로그인 시간이 만료되었습니다.')
-                        window.location.href = '/'
-                    }
-                }
-            })
+        // 게임 스타트
+        function gamestart() {
+            window.location.href = '/game'
         }
+
         // 로그아웃
         function logout(){
             alert('로그아웃 되었습니다.')
@@ -75,11 +82,7 @@
             window.location.href = '/'
         }
 
-        // 게임 스타트
-        function gamestart() {
-            window.location.href = '/game'
-        }
-
+        // 토스트 함수
         function toast(string) {
             const toast = document.getElementById("toast");
         

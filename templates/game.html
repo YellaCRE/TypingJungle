@@ -39,6 +39,7 @@
             intervalId = setInterval(operateTimer, 10);
         });
         
+        // 로그인 확인
         function game_page(){
             $.ajax({
                 type: "GET",
@@ -54,6 +55,8 @@
                 }
             })
         }
+
+        // 타이머
         // 10ms 마다 시간에 대한 숫자가 증가한다!
         function operateTimer(){
             tenMillis++;
@@ -72,6 +75,7 @@
             }
         }
         
+        // 답안 제출
         let cnt = 0;
         function submit(){
             toast('틀렸습니다!');
@@ -81,7 +85,15 @@
                 window.location.href = '/result'
             }
         }
+        
+        // 로그아웃
+        function logout(){
+            alert('로그아웃 되었습니다.')
+            $.removeCookie('mytoken')
+            window.location.href = '/'
+        }
 
+        // 토스트 함수
         function toast(string) {
             const toast = document.getElementById("toast");
         
@@ -94,12 +106,6 @@
                 }, 1000)
             toast.classList.add("reveal"),
                 toast.innerText = string
-        }
-
-        function logout(){
-            alert('로그아웃 되었습니다.')
-            $.removeCookie('mytoken')
-            window.location.href = '/'
         }
     </script>
 </head>

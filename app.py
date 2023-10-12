@@ -109,12 +109,13 @@ def api_rank():
 def api_log():
     id_receive = request.form['id_give']
     score_receive = int(request.form['score_give'])
-    result = db.ranking.find_one({'id':id_receive})
-    if result:
-        db.ranking.delete_one({'id': id_receive})
-        MIN = min(result['score'], score_receive)
-    db.ranking.insert_one({'id': id_receive, 'score': MIN})
     db.log.insert_one({'id':id_receive, 'score': score_receive, 'time': datetime.datetime.now()})
+
+    result = db.ranking.find_one({'id':id_receive})
+    if result is not None:
+        db.ranking.delete_one({'id': id_receive})
+        score_receive = min(result['score'], score_receive)
+    db.ranking.insert_one({'id': id_receive, 'score': score_receive})
     return jsonify({'result': 'success'})
 
 # [결과 API]

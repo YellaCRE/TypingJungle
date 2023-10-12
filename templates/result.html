@@ -44,7 +44,12 @@
                 success: function(response){
                     if(response['result'] == 'success'){
                         name = response['id']
+                        document.getElementById("dropdownMenuButton").textContent = name;
                         getScore(name)
+                    }
+                    else{
+                        alert('로그인 시간이 만료되었습니다.')
+                        window.location.href = '/'
                     }
                 }
             })
@@ -104,15 +109,28 @@
 </head>
 
 <body>
-    <div class="nav">
-        <span class="nav-logo">Typing Jungle</span>
-        <div class="nav-btn">
-            <button onclick="logout()">Log out</button>
+    <nav class="navbar bg-body-tertiary justify-content-between" style="height: 10vh;">
+        <a class="navbar-brand">
+            <img src="{{ url_for('static', filename='typing-jungle_logo.png') }}" height="30px"
+                onClick="gohome()">
+        </a>
+        <div class="form-inline">
+            <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+            <div class="dropdown mr-sm-2">
+                <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    userid
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">My page</a>
+                </div>
+            </div>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="" onclick="logout()">Log out</button>
         </div>
-    </div>
+    </nav>
 
     <div class="main">
-        <div class="main">
+        <div class="result-content">
             <div class="record-box">
                 <div class="record-text">YOUR RECORD</div>
                 <div id="record"></div>
@@ -187,17 +205,17 @@
 
                 </div>
             </div>
+        </div>
 
-        <div class="footer">
-            <div>
-                <button onclick="gamestart()">Retry</button>
-                <!-- game으로 이동 -->
-                <button onclick="gohome()">홈</button>
-                <!-- home으로 이동 -->
+        <div class="row justify-content-evenly" id="result-footer">
+            <div class="col-4">
+                <button onclick="gamestart()">Retry</button> 
+            </div>
+            <div class="col-4">
+                <button onclick="gohome()">Home</button>
             </div>
         </div>
     </div>
-
 </body>
 
 </html>

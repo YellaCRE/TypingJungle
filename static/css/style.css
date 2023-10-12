@@ -3,8 +3,8 @@
 
 /* login, signup 페이지에 사용되는 css */
 .main{
-    height: 100vh;
-    width: 600px;
+    height: 90vh;
+    width: 100%;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -12,51 +12,15 @@
     justify-content: center;
 }
 
-form{
-    width: 300px;
-    /* height: 150px; */
-    padding: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-form > div{
-    margin: 5px 0px;
-}
-
-.title{
-    width: 300px;
-    height: 200px;
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSie7cyddf33Xw7MtuCHgiGwDrOohvX-uHGvg&usqp=CAU');
-    background-size: cover;
-    display: flex;
-}
-
-.title > span{
-    margin: auto;
-    font-size: 40px;
-    font-weight: bolder;
-    -webkit-text-stroke: 0.5px var(--green);
+.login-form{
+    width: 400px;
+    text-align: center;
+    padding: 30px;
 }
 
 button{
     background-color: black;
     color: var(--green);
-}
-
-.nav{
-    width:100%;
-    height:100px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.nav-logo{
-    height: 100%;
-    object-fit: cover;
 }
 
 .modal{
@@ -114,13 +78,21 @@ tr > *{
     color: var(--green);
 }
 
+.result-content{
+    display: flex;
+}
+
+.result-content > div{
+    margin: 20px 10px
+}
+
 .record-box{
     background-color: black;
     color: var(--green);
-    width: 500px;
-    height: 200px;
+    width: 250px;
+    height: 450px;
+    padding: 10px;
     margin-bottom: 20px;
-
 }
 
 .record-text{
@@ -130,20 +102,24 @@ tr > *{
     text-align: center;
 }
 
+#record{
+    height: 130px;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 50px;
+}
+
+#result-footer > button{
+    margin: 0px 10px;
+    text-align: center;
+}
+
 .game{
     background-color: whitesmoke;
     /* 색상은 사이즈 보려고 넣어둔 것. 수정 예정 */
     width: 500px;
     height: 450px;
     padding: 30px;
-}
-
-#record{
-    height: 130px;
-    line-height: 130px;
-    text-align: center;
-    font-weight: bolder;
-    font-size: 50px;
 }
 
 #toast {
@@ -167,4 +143,15 @@ tr > *{
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, 0)
+}
+
+thead th:first-child, tbody th{
+    width: 20%; /* Rank 열의 너비를 20%로 설정 */
+    box-sizing: border-box;
+    text-align: center;
+}
+thead th:not(:first-child), tbody td{
+    width: 40%; /* tbody 내부의 th 열과 모든 td 열의 너비를 40%로 설정 */
+    box-sizing: border-box;
+    text-align: center;
 }

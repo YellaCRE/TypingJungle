@@ -30,15 +30,22 @@
     <script>
         $(document).ready(function() {
             game_page();
-            alert('준비가 되면 확인을 눌러주세요.')
-            question(0);
             clearInterval(intervalId);
-            intervalId = setInterval(operateTimer, 10);
+            waiting = setInterval(function(){
+                document.getElementById("game-problem").value = wait+"초 후에 시작됩니다.";
+                wait--;
+            }, 1000)
+            setTimeout(function() {
+                question(0);
+                clearInterval(waiting);
+                intervalId = setInterval(operateTimer, 10);
+            }, 3000);
         });
         
         let tenMillis = 0;
         let minutes = 0;
         let seconds = 0;
+        let wait = 2;
         let name;
         let intervalId;
 
@@ -51,6 +58,7 @@
                 success: function(response){
                     if(response['result'] == 'success'){
                         name = response['id']
+                        document.getElementById("dropdownMenuButton").textContent = name;
                     }
                     else{
                         alert('로그인 시간이 만료되었습니다.')
@@ -95,7 +103,7 @@
                 toast('틀렸습니다!');
                 return
             }
-            
+
             cnt++;
             question(cnt)
             document.getElementById("game-ans").value = null;
@@ -158,16 +166,32 @@
 </head>
 
 <body>
-    <div class="nav">
-        <button onclick="logout()">Log out</button>
-        <!-- 수정 중 -->
-    </div>
+    <nav class="navbar bg-body-tertiary justify-content-between" style="height: 10vh;">
+        <a class="navbar-brand">
+            <img src="{{ url_for('static', filename='typing-jungle_logo.png') }}" height="30px"
+                onClick="gohome()">
+        </a>
+        <div class="form-inline">
+            <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+            <div class="dropdown mr-sm-2">
+                <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    userid
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">My page</a>
+                </div>
+            </div>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="" onclick="logout()">Log out</button>
+        </div>
+    </nav>
+
     <div class="main">
         <div class="game">
             <div class="game-form">
                 <div class="form-group" id="game-form">
                     <!-- value에 문제 문장 넣기 -->
-                  <input type="text" class="form-control" id="game-problem" value="" onpaste="return false;" oncopy="return false;" oncut="return false;" readonly>
+                  <input type="text" class="form-control" id="game-problem" value="3초 후에 시작됩니다." onpaste="return false;" oncopy="return false;" oncut="return false;" readonly>
                 </div>
                 <div class="form-group">
                   <label for="game-ans">Type the sentence above!</label>

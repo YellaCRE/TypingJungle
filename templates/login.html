@@ -60,30 +60,34 @@
 </head>
 
 <body>
-    <div class="nav">
-        <img class="nav-logo"
-            src="https://blog.krafton.com/wp-content/uploads/2022/08/%EC%82%AC%EC%A7%84%EC%9E%90%EB%A3%8C1_%ED%81%AC%EB%9E%98%ED%94%84%ED%86%A4-%EC%A0%95%EA%B8%80-%EB%A1%9C%EA%B3%A0-002.jpg"
-            alt="">
-    </div>
+    <nav class="navbar bg-body-tertiary" style="height: 10vh;">
+        <div class="container" style="margin: 0;">
+          <a class="navbar-brand" href="https://jungle.krafton.com/" target="_blank">
+            <img src="{{ url_for('static', filename='jungle_logo.png') }}" height="30px">
+          </a>
+        </div>
+    </nav>
 
     <div class="main">
-        <div class="title">
-            <span>Typing</span>
-            <span>Jungle</span>
-        </div>
+        <div class="login-form">
+            <div class="title">
+                <img src="{{ url_for('static', filename='typing-jungle_title.png') }}" width="340px">
+            </div>
 
-        <div>
-            <div>
-                <input type="text" id="userid" required placeholder="아이디를 입력하세요">
+            <div class="mb-3">
+              <input type="text" class="form-control" id="userid" required placeholder="아이디를 입력하세요">
             </div>
-            <div>
-                <input type="password" id="userpw" required placeholder="비밀번호를 입력하세요">
+            <div class="mb-3">
+              <input type="password" class="form-control"  id="userpw" required placeholder="비밀번호를 입력하세요">
             </div>
-            <div class="btn">
-                <button class="btn-LogIn" onclick="login()">Log in</button>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary" onclick="login()">Log in</button>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary" onclick="signup()">sign up</button>
             </div>
         </div>
-        <button class="btn-signUp" onclick="signup()">Sign up</button>
+        
     </div>
 </body>
 

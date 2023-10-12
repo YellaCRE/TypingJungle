@@ -36,7 +36,7 @@
                 wait--;
             }, 1000)
             setTimeout(function() {
-                question(0);
+                question();
                 clearInterval(waiting);
                 intervalId = setInterval(operateTimer, 10);
             }, 3000);
@@ -68,14 +68,27 @@
             })
         }
 
-        function question(i){
+        let ex = [0,1,2,3,4,5,6,7,8,9];
+        function question(){
             let q_ls = [
             '잊지 마라, 네 인생의 주인은 너다.',
-            '동료의 코드리뷰와 피드백을 감사히 여기자.',
-            '물어보기 전에 최선의 내 답을 먼저 찾자.',
-            '끝!'
+            '정글에서의 시간은 늘 부족하고 학습량은 많다. 단, 너만 그런 것은 아니다.',
+            '스스로 깨면 병아리, 남이 깨면 후라이. 물어보기 전에 최선의 내 답을 먼저 찾자.',
+            '나의 구급상자와 진통제를 동료에게 아끼지 말자. 언젠가는 다시 돌아온다',
+            '숲 안에서는 결코 숲의 전경을 볼 수 없다. 동료의 코드리뷰와 피드백을 감사히 여기자.',
+            '정글에는 오답이 없다. 그렇다고 정답이 있는 것도 아니다.',
+            '오늘의 TIL을 적지 않으면, 정글의 하루는 끝나지 않는다.',
+            '몰입하고 몰입해라. 오늘의 몰입이 내일의 성장을 만든다.',
+            '쓰레기는 먼저 본 사람이 줍는다.',
+            '끝의 끝까지 하면 기회는 반드시 온다. 크래프톤이 그랬다.'
             ]
-            document.getElementById("game-problem").value = q_ls[i]
+
+            function ex_delete(){
+                let ex_number = Math.floor(Math.random() * ex.length);//예문의 배열 수만큼 랜덤 값 구하기
+                ex = ex.filter((ex_ex) => ex_ex !== ex[ex_number]);//예문 지우기
+                return ex_number
+            }
+            document.getElementById("game-problem").value = q_ls[ex_delete()]
         }
         // 타이머
         // 10ms 마다 시간에 대한 숫자가 증가한다!
@@ -105,7 +118,7 @@
             }
 
             cnt++;
-            question(cnt)
+            question()
             document.getElementById("game-ans").value = null;
             document.getElementById("solved_cnt").textContent = cnt;
             if(cnt >= 3){

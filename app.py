@@ -125,5 +125,15 @@ def api_score():
     score = list(db.log.find({'id':name}, {'_id': False}))
     return jsonify({'score': score[-1]})
 
+# [내 기록 API]
+@app.route('/api/best', methods=['GET'])
+def api_best():
+    name = request.args.get('id_give')
+    score = list(db.log.find({'id':name}, {'_id': False}).sort('score', 1))
+    if score == []:
+        return jsonify({'result': 'fail'})
+    else:
+        return jsonify({'result': 'success','score': score[0]})
+
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', port = 5001, debug = True)

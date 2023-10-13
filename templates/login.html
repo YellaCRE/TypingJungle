@@ -60,10 +60,10 @@
 </head>
 
 <body>
-    <nav class="navbar bg-body-tertiary" style="height: 10vh;">
-        <div class="container" style="margin: 0;">
+    <nav class="navbar bg-body-tertiary" style="height: 75px; background-color: white; box-shadow: 0px 0px 30px rgb(240, 240, 240);">
+        <div class="container" style="margin: 0; padding: 0px;">
           <a class="navbar-brand" href="https://jungle.krafton.com/" target="_blank">
-            <img src="{{ url_for('static', filename='jungle_logo.png') }}" height="30px">
+            <img src="{{ url_for('static', filename='jungle_logo.png') }}" height="35px">
           </a>
         </div>
     </nav>
@@ -75,16 +75,15 @@
             </div>
 
             <div class="mb-3">
-              <input type="text" class="form-control" id="userid" style="margin-bottom: 5px" required placeholder="아이디를 입력하세요">
-              <input type="password" class="form-control"  id="userpw" style="margin-bottom: 5px" required placeholder="비밀번호를 입력하세요">
+              <input type="text" class="form-control" id="userid" onKeyPress="if( event.keyCode==13 ){login();}" style="margin-bottom: 5px" required placeholder="아이디를 입력하세요">
+              <input type="password" class="form-control" id="userpw" onKeyPress="if( event.keyCode==13 ){login();}" style="margin-bottom: 5px" required placeholder="비밀번호를 입력하세요">
             </div>
 
             <div class="mb-3">
-                <button type="button" class="btn btn-outline-success" onclick="login()" style="width:100%; margin-bottom: 5px">Log in</button>
+                <button type="button" class="btn btn-success" onclick="login()" style="width:100%; margin-bottom: 5px">Log in</button>
                 <button type="button" class="btn btn-outline-success" onclick="signup()" style="width:100%; margin-bottom: 5px">sign up</button>
             </div>
         </div>
-        
     </div>
 </body>
 

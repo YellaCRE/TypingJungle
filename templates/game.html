@@ -68,7 +68,6 @@
             })
         }
 
-        let ex = [0,1,2,3,4,5,6,7,8,9];
         function question(){
             let q_ls = [
             '잊지 마라, 네 인생의 주인은 너다.',
@@ -83,12 +82,7 @@
             '끝의 끝까지 하면 기회는 반드시 온다. 크래프톤이 그랬다.'
             ]
 
-            function ex_delete(){
-                let ex_number = Math.floor(Math.random() * ex.length);//예문의 배열 수만큼 랜덤 값 구하기
-                ex = ex.filter((ex_ex) => ex_ex !== ex[ex_number]);//예문 지우기
-                return ex_number
-            }
-            document.getElementById("game-problem").value = q_ls[ex_delete()]
+            document.getElementById("game-problem").value = q_ls[Math.floor(Math.random() * 10)];
         }
         // 타이머
         // 10ms 마다 시간에 대한 숫자가 증가한다!
@@ -217,8 +211,8 @@
 
             <div class="mt-auto p-2 container text-center">
                 <div class="d-flex">
-                    <div class="p-2">
-                        <h5 class="game-num" style="margin-right:20px;">푼 문제 수:
+                    <div class="p-2 d-flex align-items-center">
+                        <h5 class="game-num">푼 문제 수:
                             <span id="solved_cnt">0</span> / <span id="question_cnt">3</span>
                         </h5>
                     </div>

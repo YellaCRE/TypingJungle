@@ -114,7 +114,7 @@
         style="height: 75px; box-shadow: 0px 0px 50px rgb(131, 131, 131);">
         <a class="navbar-brand">
             <img src="{{ url_for('static', filename='typing-jungle_logo_removebg.png') }}" height="35px"
-                onClick="gohome()">
+            onClick="window.location.reload()">
         </a>
         <div class="form-inline">
             <span class="navbar-text text-success" id="nav_name"
@@ -124,16 +124,16 @@
     </nav>
 
     <div class="main">
-        <div class="container">
+        <div class="result-content">
             <div class="row">
-                <div class="col">
-                    <img src="{{ url_for('static', filename='profile.png') }}" height="100px" style="margin-top:10%">
+                <div class="col d-flex flex-column align-items-center text-center" style="padding: 50px 15px; box-shadow: inset 0 0 100px #343A40; border-radius: 10px; margin: 20px 20px;">
+                    <img src="{{ url_for('static', filename='profile.png') }}" height="100px" style="margin:10% 0">
                     <h2 style="font-family: 'BMDoHyeon'; color:white; margin-top:10px"> Typing Jungle</h2>
-                    <h1 id="username" style="font-family: 'BMDoHyeon'; color:var(--green); margin-top:30px">닉네임</h1>
+                    <h1 id="username" style="font-family: 'BMDoHyeon'; color:var(--green); margin-top:30px ">닉네임</h1>
                     <h3 style="font-family: 'BMDoHyeon'; color:var(--green); margin-top:20px">최고 점수</h3>
                     <h3 style="font-family: 'BMDoHyeon'; color:var(--green); margin-top:5px" id="myScore"></h3>
                 </div>
-                <div class="col">
+                <div class="col" style="margin: 0px 20px;">
                     <div class="ranking">
                         <div class="ranking-title">명예의 전당</div>
                         <!-- top 10 랭킹 뜨도록 구현 -->
@@ -207,11 +207,10 @@
 
         <div>
             <button class="btn btn-success btn-lg" style="margin-bottom: 10px;" onclick="gamestart()">Game start</button>
-            <!-- 누르면 game page로 이동 -->
         </div>
 
         <div>
-            <button class="btn btn-outline-success btn-lg" id="btn-tutorial">Tutorial</button>
+            <button class="btn btn-outline-success" id="btn-tutorial">Tutorial</button>
             <div class="modal">
                 <div class="modal-content">
                     <a id="btn-close" href="#none">
@@ -219,7 +218,6 @@
                     </a>
                     <div class="modal-content-text">
                         <h2>How to play Typing Jungle</h2>
-                        <!-- 키보드 아이콘 -->
                         <i class="bi bi-keyboard" style="font-size: 5rem;"></i>
                         <p>
                             위의 문제와 동일한 문장을 아래 답안란에 작성하세요.<br>
@@ -227,7 +225,7 @@
                             오타가 발생하면 다음 문제로 넘어가지 않아요!<br>
                             직접 오타를 찾고, 정확하게 작성해보세요.<br>
                             <br>
-                            타이핑 정글과 함께 빠르고 정확한 타이핑 실력을 갖춘 정글러가 되어보세요🤓
+                            타이핑 정글과 함께 정글 10계명을 리마인드하며 <br>빠르고 정확한 타이핑 실력을 갖춘 정글러가 되어보세요🤓
                         </p>
                     </div>
                 </div>

@@ -122,12 +122,11 @@
 
     <div class="main">
         <div class="result-content">
-            <div class="record-box" style="background-color:white; box-shadow: 5px 5px 5px 5px grey inset">
+            <div class="record-box d-flex flex-column align-items-center justify-content-center" style=" box-shadow: inset 0 0 100px #343A40; border-radius: 10px;">
                 <div class="record-text">YOUR RECORD</div>
                 <div id="record"></div>
             </div>
 
-            <!-- 보류 -->
             <div class="ranking">
                 <div class="ranking-title">명예의 전당</div>
                 <!-- top 10 랭킹 뜨도록 구현 -->
@@ -198,12 +197,12 @@
             </div>
         </div>
 
-        <div class="row justify-content-evenly" id="result-footer">
-            <div class="col-4">
-                <button class="btn btn-outline-success btn-lg" style="margin-right: 5em;" onclick="gamestart()">Retry</button> 
+        <div class="row" id="result-footer">
+            <div class="col-6 text-center">
+                <button class="btn btn-success btn-lg" onclick="gamestart()">Retry</button> 
             </div>
-            <div class="col-4">
-                <button class="btn btn-outline-success btn-lg" onclick="gohome()">Home</button>
+            <div class="col-6 text-center">
+                <button class="btn btn-success btn-lg" onclick="gohome()">Home</button>
             </div>
         </div>
     </div>

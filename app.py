@@ -94,16 +94,6 @@ def api_valid():
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
 
-# [랭킹 API]
-@app.route('/api/rank', methods=['GET'])
-def api_rank():
-    ranking_ls = list(db.ranking.find({}, {'_id': False}).sort('score', 1))
-    if len(ranking_ls) > 10:
-        top10_ls = ranking_ls[:10]
-    else:
-        top10_ls = ranking_ls
-    return jsonify({'rank': top10_ls})
-
 # [로그 API]
 @app.route('/api/log', methods=['POST'])
 def api_log():
@@ -117,6 +107,16 @@ def api_log():
         score_receive = min(result['score'], score_receive)
     db.ranking.insert_one({'id': id_receive, 'score': score_receive})
     return jsonify({'result': 'success'})
+
+# [랭킹 API]
+@app.route('/api/rank', methods=['GET'])
+def api_rank():
+    ranking_ls = list(db.ranking.find({}, {'_id': False}).sort('score', 1))
+    if len(ranking_ls) > 10:
+        top10_ls = ranking_ls[:10]
+    else:
+        top10_ls = ranking_ls
+    return jsonify({'rank': top10_ls})
 
 # [결과 API]
 @app.route('/api/score', methods=['GET'])

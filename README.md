@@ -1,4 +1,4 @@
-# typing_jungle  
+# Typing Jungle  
 ## 크래프톤 정글 3기 🔥3박 4일 미니 프로젝트🔥
 <p align="center" >
   <img src="static/typing-jungle_title.png" alt="Logo" width="40%">

@@ -57,15 +57,15 @@
           <b>10 Ways to Survive in KRAFTON JUNGLE</b>
           <ol>
             <li>잊지 마라, 네 인생의 주인은 너다.</li>
-            <li>정글에서의 시간은 늘 부족하고 학습량은 많다. 단, 너만 그런 것은 아니다.</li>
-            <li>스스로 깨면 병아리, 남이 깨면 후라이. 물어보기 전에 최선의 ‘내 답’을 먼저 찾자.</li>
-            <li>나의 구급상자와 진통제를 동료에게 아끼지 말자. 언젠가는 다시 돌아온다.</li>
-            <li>숲 안에서는 결코 숲의 전경을 볼 수 없다. 동료의 코드리뷰와 피드백을 감사히 여기자.</li>
-            <li>정글에는 오답이 없다. 그렇다고 정답이 있는 것도 아니다.</li>
-            <li>오늘의 TIL을 적지 않으면, 정글의 하루는 끝나지 않는다.</li>
-            <li>몰입하고 몰입해라. 오늘의 몰입이 내일의 성장을 만든다.</li>
+            <li>정글에서의 시간은 늘 부족하고 학습량은 많다. <br/>단, 너만 그런 것은 아니다.</li>
+            <li>스스로 깨면 병아리, 남이 깨면 후라이. <br/>물어보기 전에 최선의 ‘내 답’을 먼저 찾자.</li>
+            <li>나의 구급상자와 진통제를 동료에게 아끼지 말자. <br/>언젠가는 다시 돌아온다.</li>
+            <li>숲 안에서는 결코 숲의 전경을 볼 수 없다. <br/>동료의 코드리뷰와 피드백을 감사히 여기자.</li>
+            <li>정글에는 오답이 없다. <br/>그렇다고 정답이 있는 것도 아니다.</li>
+            <li>오늘의 TIL을 적지 않으면, <br/>정글의 하루는 끝나지 않는다.</li>
+            <li>몰입하고 몰입해라. <br/>오늘의 몰입이 내일의 성장을 만든다.</li>
             <li>쓰레기는 먼저 본 사람이 줍는다.</li>
-            <li>끝의 끝까지 하면 기회는 반드시 온다. 크래프톤이 그랬다.</li>
+            <li>끝의 끝까지 하면 기회는 반드시 온다. <br/>크래프톤이 그랬다.</li>
           </ol>
         </p>
       </td>
@@ -108,10 +108,12 @@
 ## 3️⃣ 기술 스택
 
 <div align="left">
+  <img src="https://img.shields.io/badge/javascript-F7DF1E.svg?style=for-the-badge&logo=javascript&logoColor=white">
   <img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white">
   <img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white">
-  <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white">
   <img src="https://img.shields.io/badge/jinja2-B41717?style=for-the-badge&logo=jinja&logoColor=white">
+  <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white">
+  <br/>
   <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=white">
   <img src="https://img.shields.io/badge/flask-000000?style=for-the-badge&logo=flask&logoColor=white">
   <img src="https://img.shields.io/badge/mongodb-47A248?style=for-the-badge&logo=mongodb&logoColor=white">

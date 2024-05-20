@@ -46,7 +46,9 @@
 
 
 ### 📍 기획 의도
-
+<p align="center" >
+  <img src="static/intro.jpg" alt="intro" width="70%">
+</p>
 
 <br/>
 <a name="intro"> </a>
@@ -99,3 +101,14 @@
 <a name="arch"></a>
 
 ## 4️⃣ 시스템 아키텍쳐
+<p align="center" >
+  <img src="static/arch.jpg" alt="intro" width="70%">
+</p>
+
+<br />
+<a name="troubleShooting"></a>
+
+## 5️⃣ 트러블 슈팅
+<p align="center" >
+  <img src="static/troubleShooting.jpg" alt="intro" width="70%">
+</p>
